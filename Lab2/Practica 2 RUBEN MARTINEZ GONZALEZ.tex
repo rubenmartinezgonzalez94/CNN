@@ -86,6 +86,7 @@ def sobelFiltering(image, sobel_filter):
     return filtered_image
     \end{lstlisting}
     
+    \clearpage
     \noindent
     La implementación de esta función sigue la lógica descrita a continuación:
     \begin{itemize}
@@ -112,7 +113,7 @@ def sobelFiltering(image, sobel_filter):
     \noindent
     Se probó la función sobelFiltering con los siguientes filtros Sobel:
     \begin{itemize}
-        \item Filtro Sobel en dirección x
+        \item Filtro Sobel en dirección 'X'
         \begin{lstlisting}[language=Python, caption={Filtro Sobel vertical},label={lst:sobelFiltersx}]
     Mx = np.array([
     [-1, 0, 1],
@@ -120,16 +121,17 @@ def sobelFiltering(image, sobel_filter):
     [-1, 0, 1]
     ], dtype=float)
         \end{lstlisting}
-        \item Filtro Sobel en dirección y
+        \item Filtro Sobel en dirección 'Y'
         \begin{lstlisting}[language=Python, caption={Filtros Sobel horizontal},label={lst:sobelFiltersy}]
     Mx = np.array([
-    [-1, 0, 1],
-    [-2, 0, 2],
-    [-1, 0, 1]
+    [-1, -2, -1],
+    [ 0,  0,  0],
+    [ 1,  2,  1]
     ], dtype=float)
         \end{lstlisting}
     \end{itemize}
     
+    \clearpage
     \noindent
     Para ejecutar la prueba solo fue necesario llamar a la función sobelFiltering con la imagen y el filtro correspondiente.
     A modo complementario se desarrolló la función compare\_images para mostrar juntas la imagen original, la imagen filtrada y las diferencias entre ambas (resta de píxeles).
@@ -219,7 +221,7 @@ compare_images(imagen_original,'Imagen Original', sobel_filtered_vertical_image,
     La implementación de esta función se mostrará por partes para su mejor comprensión.
     \begin{itemize}
         \item
-        Primero se aplica un suavizado a la imagen utilizando un filtro Gaussiano para reducir ruído y detalles innecesarios.
+        Primero se aplica un suavizado a la imagen utilizando un filtro Gaussiano para reducir ruido y detalles innecesarios.
         (se reutiliza la función de suavizado averageFiltering implementada en el laboratorio 1)
         \begin{lstlisting}[language=Python, caption={Implementación edgeDetector - Suavisado},label={lst:edgeDetector1}]
 # 1. Suavizado
@@ -331,6 +333,7 @@ def get_edge_points(thresholded_edges, num_arrows = 10):
 gradient_direction_image = np.arctan2(filtered_horizontal_image, filtered_vertical_image)
             \end{lstlisting}
             
+            \item
             \item Finalmente se dibujaron las flechas en la imagen umbralizada recorriendo los puntos obtenidos aleatoriamente en el paso anterior,
             calculando las coordenadas finales de la flecha y utilizando la función plt.arrow de la biblioteca Matplotlib.
             Las coordenadas finales de la flecha se calcularon con las fórmulas:
@@ -338,7 +341,7 @@ gradient_direction_image = np.arctan2(filtered_horizontal_image, filtered_vertic
                 \item dx = magnitud * np.cos(dirección)
                 \item dy = magnitud * np.sin(dirección)
             \end{itemize}
-            La magnitud se dividió por 10 (a escala) para que las flechas se escalen adecuadamente en la imagen.
+            La magnitud se dividió por 10 a conveniencia para que las flechas se escalen adecuadamente en la imagen.
             \begin{lstlisting}[language=Python, caption={Implementación edgeDetector - Dibujar flechas},label={lst:edgeDetector6}]
   for point in edge_points:
     y, x = point
@@ -353,6 +356,8 @@ gradient_direction_image = np.arctan2(filtered_horizontal_image, filtered_vertic
             \end{lstlisting}
         
         \end{itemize}
+        
+        \clearpage
         \item Finalmente se muestran los resultados obtenidos en 4 subfiguras que contienen:
         \begin{itemize}
             \item La derivada en dirección 'X'
