@@ -1,4 +1,3 @@
-#IGNOre all .gz files
 *.gz
 *.log
 *.aux
